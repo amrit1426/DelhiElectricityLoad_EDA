@@ -56,6 +56,10 @@ C:\Users\AB\hermes-work\data_projects\20251122_DelhiElectricityLoad_CaseStudy + 
 2. Install dependencies: `pip install pandas numpy matplotlib seaborn`
 3. Open `20251122_DelhiElectricityLoad_CaseStudy.ipynb` in Jupyter
 
+## Live App
+
+- **Delhi Electricity Load Dashboard:** https://delhi-electricity-load-dash.streamlit.app/
+
 ## About
 
 This case study was completed as part of a data analytics learning path, focusing on time series analysis and energy demand forecasting.
