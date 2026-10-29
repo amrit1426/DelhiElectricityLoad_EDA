@@ -25,7 +25,7 @@ def load_data():
     load = load.sort_values("timestamp").reset_index(drop=True)
     
     # Resample to hourly by averaging 15-min intervals
-    load = load.set_index("timestamp").resample("H").mean().reset_index()
+    load = load.set_index("timestamp").resample("h").mean().reset_index()
     
     # Load weather data
     weather = pd.read_csv("delhi_weather_data.csv")
