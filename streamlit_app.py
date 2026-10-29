@@ -116,15 +116,26 @@ with tab_overview:
         f"{filtered['temp'].mean():.1f}" if len(filtered) else "N/A",
     )
 
-    st.subheader("Daily Load Trend")
+    st.subheader("Monthly Load Trend by Year")
     if len(filtered_daily):
-        fig = px.line(
-            filtered_daily,
-            x="timestamp",
-            y="Load",
-            title="Daily Electricity Load Demand",
+        monthly_trend = (
+            filtered_daily.assign(
+                year=filtered_daily["timestamp"].dt.year,
+                month=filtered_daily["timestamp"].dt.month,
+            )
+            .groupby(["year", "month"], as_index=False)["Load"]
+            .mean()
         )
-        fig.update_traces(line_color="#f59e0b")
+        fig = px.line(
+            monthly_trend,
+            x="month",
+            y="Load",
+            color="year",
+            title="Monthly Electricity Load Demand by Year",
+            markers=True,
+            category_orders={"month": list(range(1, 13))},
+        )
+        fig.update_layout(xaxis_tickmode="linear", xaxis_tick0=1, xaxis_dtick=1)
         st.plotly_chart(style_chart(fig), width="stretch")
 
     st.subheader("Daily Temperature Trend")
